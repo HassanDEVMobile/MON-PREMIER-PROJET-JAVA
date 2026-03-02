@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class Main {
     Scanner sc = new Scanner(System.in);
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         int choix = -1;
 
             do {
@@ -81,7 +81,8 @@ public class Main {
                 System.out.println("ENREGISTREMENT EFFECTUER AVEC SUCCES");
             } else if (choix1 == 2) {
                 System.out.println("Veuillez saisir l'Id du Match a supprimer :");
-                int Id = sc.nextInt();
+                int Id = 0;
+                VERIFICATIONSAISIE(Id);
                 matchs.delete(Id);
                 System.out.println("Matchs Supprimer avec succes");
             }
@@ -91,8 +92,8 @@ public class Main {
             }
              else if(choix1==4){
                 System.out.println("Veuillez saisir l'Id du Matchs a Modifier :");
-                int ID = sc.nextInt();
-                sc.nextLine();
+                int ID = 0;
+                VERIFICATIONSAISIE(ID);
                 Matchaddandupdate();
                 System.out.println("MODIFICATION EFFECTUER AVEC SUCCES");
             }
@@ -138,7 +139,8 @@ public class Main {
                else if(choix2==2){
 
                   System.out.println("Veuillez saisir l'Id de l'equipe a supprimer :");
-                  int Id = sc.nextInt();
+                  int Id = 0;
+                  VERIFICATIONSAISIE(Id);
                   equipe. Delete(Id);
                   System.out.println("Equipe Supprimer avec succes ");
               }
@@ -148,8 +150,8 @@ public class Main {
               }
                else if(choix2==4){
                   System.out.println("Veuillez saisir l'Identifiant de l'equipe a Modifier:");
-                  int Id = sc.nextInt();
-                  sc.nextLine();
+                  int Id =0;
+                  VERIFICATIONSAISIE(Id);
                   System.out.println("Veuillez saisir le nouveau nom de l'equipe :");
                   String name = sc.nextLine();
                   equipe.update(name);
@@ -166,10 +168,11 @@ public class Main {
          MatchService matchs = new MatchService();
           Scanner sc = new Scanner(System.in);
          System.out.println("Veuillez saisir l'Identifiant de l'équipe Domicile :");
-         int EquipeDomicileID = sc.nextInt();
+         int EquipeDomicileID=0;
+         VERIFICATIONSAISIE( EquipeDomicileID);
          System.out.println("Veuillez saisir l'Identifiant de l'équipe Extérieur :");
-         int EquipeExterieurID = sc.nextInt();
-         sc.nextLine();
+         int EquipeExterieurID = 0;
+         VERIFICATIONSAISIE(EquipeExterieurID);
          System.out.println("Veuillez saisir la poule du match :");
          String poule = sc.nextLine();
          System.out.println("Veuillez saisir le Nom du stade :");
@@ -184,5 +187,31 @@ public class Main {
          }
      }
 
+    /**
+     * Cette methode nous permettra de verifier que l'utilisateur Une valeur de type entier
+     * @param id ce parametre represente la variable a la quelle nous devrons affeccter la bonne saisie
+     */
+        private static void VERIFICATIONSAISIE(int id) {
+         Scanner sc = new Scanner(System.in);
+          while (!sc.hasNextInt()){
+              System.out.println("Erreur vous devez saisir un nombre entier");
+              System.out.println("Veuillez ressayer :");
+              sc.next();
+          }
+          id = sc.nextInt();
+      }
+
+    /**
+     *
+     */
+    private static void VERIFICATIONSAISIEDETYPECHAINE (String name){
+        Scanner sc = new Scanner(System.in);
+        while(!sc.hasNextLine()){
+            System.out.println("La saisie ne doit contenir que des caractere");
+            System.out.println("Veuillez ressayer :");
+            sc.next();
+        }
+        name = sc.nextLine();
+    }
 }
 
