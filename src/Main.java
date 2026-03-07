@@ -187,8 +187,8 @@ public class Main {
          }
      }
 
-    /**
-     * Cette methode nous permettra de verifier que l'utilisateur Une valeur de type entier
+     /**
+     * Cette methode nous permettra de verifier que l'utilisateur a saisie Une valeur de type entier
      * @param id ce parametre represente la variable a la quelle nous devrons affeccter la bonne saisie
      */
         private static void VERIFICATIONSAISIE(int id) {
