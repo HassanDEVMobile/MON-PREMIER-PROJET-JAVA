@@ -23,6 +23,10 @@ public class MatchService {
         return macthDAO.findAll();
     }
 
+    public Match findDone(int id){
+        return macthDAO.findDone(id);
+    }
+
     /**
      * Cette methode permet d'ajouter les Match
      * @param date ce paramettre represente  la date du match
