@@ -21,4 +21,8 @@ public class Match {
          this.date = date;
      }
 
+     public Match(int id){
+         this.id = id;
+     }
+
 }

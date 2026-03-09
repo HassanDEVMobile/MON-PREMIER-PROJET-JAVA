@@ -52,9 +52,21 @@ public class MatchDAO {
         return Match;
     }
 
-    public Match findDone(int id){
-        PreparedStatement preparedStatement =connection.prepareStatemen()
-        return null;
+    public Match findDone(int id) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(Match_FINDONE);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            id = resultSet.getInt("id");
+            String poule = resultSet.getNString("poule");
+            int EquipeDomicileID = resultSet.getInt("EquipeDomicileID");
+            int EquipeExterieurID = resultSet.getInt("EquipeExterieurID");
+            String stade = resultSet.getNString("stade");
+            Date date = resultSet.getDate("date");
+            Match match = new Match(id, poule, EquipeDomicileID, EquipeExterieurID, stade, date);
+            return match;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
