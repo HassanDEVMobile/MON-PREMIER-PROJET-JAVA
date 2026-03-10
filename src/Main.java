@@ -141,7 +141,7 @@ public class Main {
                   System.out.println("Veuillez saisir l'Id de l'equipe a supprimer :");
                   int Id = 0;
                   VERIFICATIONSAISIE(Id);
-                  equipe. Delete(Id);
+                  equipe.Delete(Id);
                   System.out.println("Equipe Supprimer avec succes ");
               }
                else if(choix2==3){

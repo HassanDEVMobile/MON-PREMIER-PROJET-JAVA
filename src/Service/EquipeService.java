@@ -39,7 +39,11 @@ public class EquipeService {
             return equipeDAO.add(name);
         }
 
-      public void update(String name){
-            equipeDAO.update(name);
+      public void update(String Nom){
+            equipeDAO.update(Nom);
+      }
+
+      public Equipe findOne(int id){
+            return equipeDAO.findOne(id);
       }
 }
