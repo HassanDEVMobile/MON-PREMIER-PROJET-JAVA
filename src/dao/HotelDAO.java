@@ -7,19 +7,19 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class HotelDAO {
-   private static String Hotel_INSERT ="INSERT INTO Hotel (Nationnalite_ID, Nom,email,Localisation) VALUES (?,?,?,?)";
-   private static String Hotel_UPDATE ="UPDATE Hotel SET HotelID = ?,Nationnalite_ID = ?,Nom = ?,email = ?,Localisation = ? WHERE HotelID = ?";
-   private static String Hotel_FINDALL ="SELECT * FROM Hotel";
-   private static String Hotel_FINDONE ="SELECT * FROM Hotel WHERE HotelID = ?";
-   private static String Hotel_DELETE ="DELETE FROM Hotel WHERE HotelID = ?";
+    private static String Hotel_INSERT ="INSERT INTO Hotel (Nationnalite_ID, Nom,email,Localisation) VALUES (?,?,?,?)";
+    private static String Hotel_UPDATE ="UPDATE Hotel SET HotelID = ?,Nationnalite_ID = ?,Nom = ?,email = ?,Localisation = ? WHERE HotelID = ?";
+    private static String Hotel_FINDALL ="SELECT * FROM Hotel";
+    private static String Hotel_FINDONE ="SELECT * FROM Hotel WHERE HotelID = ?";
+    private static String Hotel_DELETE ="DELETE FROM Hotel WHERE HotelID = ?";
 
-    private static String URL="jdbc:mysql://localhost:3306/DBNAME";
-    private static String USER="admin";
-    private static String Password="admin";
+    private static final String URL_DATABASE="jdbc:mysql://193.203.169.18:3306:/mon_etab_IIT-0410";
+    private static final String USERNAME_DATABASE ="root";
+    private static final String password_DATABASE ="iit-bassam";
     Connection connection;
     public HotelDAO(){
         try {
-            connection = DriverManager.getConnection(URL,USER,Password);
+            connection = DriverManager.getConnection(URL_DATABASE,USERNAME_DATABASE,password_DATABASE);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

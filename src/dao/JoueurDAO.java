@@ -13,13 +13,13 @@ public class JoueurDAO {
     private static String Joueur_FINDONE ="SELECT * FROM Joueur WHERE JoueurID = ? ";
     private static String Joueur_DELETE ="DELETE FROM Joueur WHERE JoueurID = ?";
 
-    private static String URL="jdbc:mysql://localhost:3306/DBNAME";
-    private static String USER="admin";
-    private static String Password="admin";
+    private static final String URL_DATABASE="jdbc:mysql://193.203.169.18:3306:/mon_etab_IIT-0410";
+    private static final String USERNAME_DATABASE ="root";
+    private static final String password_DATABASE ="iit-bassam";
     Connection connection;
     public JoueurDAO(){
         try {
-            connection = DriverManager.getConnection(URL,USER,Password);
+            connection = DriverManager.getConnection(URL_DATABASE,USERNAME_DATABASE,password_DATABASE);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -75,16 +75,16 @@ public class JoueurDAO {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(Joueur_FINDONE);
             ResultSet resultSet = preparedStatement.executeQuery();
-              if(resultSet.next()) {
-                  JoueurID = resultSet.getInt("JoueurID");
-                  int Nationnalite_ID = resultSet.getInt("Nationnalite_ID");
-                  String Nom_Prenom = resultSet.getNString("Nom_Prenom");
-                  int age = resultSet.getInt("age");
-                  String poste = resultSet.getNString("poste");
-                  String club = resultSet.getNString("club");
-                  Joueur joueur = new Joueur( JoueurID, Nationnalite_ID, Nom_Prenom, age, poste, club);
-                  return joueur;
-              }
+            if(resultSet.next()) {
+                JoueurID = resultSet.getInt("JoueurID");
+                int Nationnalite_ID = resultSet.getInt("Nationnalite_ID");
+                String Nom_Prenom = resultSet.getNString("Nom_Prenom");
+                int age = resultSet.getInt("age");
+                String poste = resultSet.getNString("poste");
+                String club = resultSet.getNString("club");
+                Joueur joueur = new Joueur( JoueurID, Nationnalite_ID, Nom_Prenom, age, poste, club);
+                return joueur;
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

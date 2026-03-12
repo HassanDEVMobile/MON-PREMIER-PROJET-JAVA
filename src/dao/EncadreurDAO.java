@@ -6,20 +6,22 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public class EncadreurDAO {
-   private static String Encadreur_INSERT ="INSERT INTO Encadreur (Nationnalite_ID, Nom_Prenom, age, role) VALUES (?,?,?,?)";
-   private static String Encadreur_UPDATE ="UPDATE Encadreur SET Encad_ID = ?,Nationnalite_ID = ?,Nom_Prenom = ?,age = ?,role = ? WHERE Encad_ID = ?";
-   private static String Encadreur_FINDALL ="SELECT * FROM Encadreur";
-   private static String Encadreur_FINDONE ="SELECT * FROM Encadreur WHERE Encad_ID = ?";
-   private static String Encadreur_DELETE ="DELETE FROM Encadreur WHERE Encad_ID = ?";
 
-    private static String URL="jdbc:mysql://localhost:3306/DBNAME";
-    private static String USER="admin";
-    private static String Password="admin";
+public class EncadreurDAO {
+    private static String Encadreur_INSERT ="INSERT INTO Encadreur (Nationnalite_ID, Nom_Prenom, age, role) VALUES (?,?,?,?)";
+    private static String Encadreur_UPDATE ="UPDATE Encadreur SET Encad_ID = ?,Nationnalite_ID = ?,Nom_Prenom = ?,age = ?,role = ? WHERE Encad_ID = ?";
+    private static String Encadreur_FINDALL ="SELECT * FROM Encadreur";
+    private static String Encadreur_FINDONE ="SELECT * FROM Encadreur WHERE Encad_ID = ?";
+    private static String Encadreur_DELETE ="DELETE FROM Encadreur WHERE Encad_ID = ?";
+
+    private static final String URL_DATABASE ="jdbc:mysql://193.203.169.18:3306:/mon_etab_IIT-0410";
+    private static final String USERNAME_DATABASE ="root";
+    private static final String password_DATABASE ="iit-bassam";
+
     Connection connection;
     public EncadreurDAO(){
         try {
-            connection = DriverManager.getConnection(URL,USER,Password);
+            connection = DriverManager.getConnection(URL_DATABASE,USERNAME_DATABASE,password_DATABASE);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -118,18 +120,18 @@ public class EncadreurDAO {
      * @param  Encad_ID
      * @return
      */
-    public Encadreur findOne(int  Encad_ID){
+    public Encadreur findOne(int  Encad_ID) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(Encadreur_FINDONE);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()){
-                 Encad_ID = resultSet.getInt("Encad_ID");
-                int  Nationnalite_ID = resultSet.getInt("Nationnalite_ID");
+            if (resultSet.next()) {
+                Encad_ID = resultSet.getInt("Encad_ID");
+                int Nationnalite_ID = resultSet.getInt("Nationnalite_ID");
                 String Nom_Prenom = resultSet.getNString("Nom_Prenom");
                 int age = resultSet.getInt("age");
                 String role = resultSet.getNString("role");
                 Encadreur encadreur = new Encadreur(Encad_ID, Nationnalite_ID, Nom_Prenom, age, role);
-                 return encadreur;
+                return encadreur;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -137,5 +139,6 @@ public class EncadreurDAO {
 
         return null;
     }
-    }
+}
+
 

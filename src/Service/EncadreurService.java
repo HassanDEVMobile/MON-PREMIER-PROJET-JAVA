@@ -33,7 +33,7 @@ public class EncadreurService {
      * @param role
      */
     public void update(int Encad_ID, int Nationnalite_ID, String Nom_Prenom, int age, String role) {
-        encadreurDAO.update(Encad_ID, Nationnalite_ID, Nom_Prenom, age, role);
+        encadreurDAO.update(Encad_ID,Nationnalite_ID, Nom_Prenom, age,role );
     }
 
 

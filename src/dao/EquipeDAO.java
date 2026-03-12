@@ -15,16 +15,17 @@ public class EquipeDAO {
     private static String Equipe_FINDONE = "SELECT * FROM Equipe WHERE id = ";
     private static String Equipe_DELETE = "DELETE FROM Equipe WHERE id = ?";
 
-    private static String URL = "jdbc:mysql://localhost:3306/nomdelabase";
-    private static String USERNAME = "admin";
-    private static String password = "admin";
+    private static final String URL_DATABASE ="jdbc:mysql://193.203.169.18:3306:/mon_etab_IIT-0410";
+    private static final String USERNAME_DATABASE ="root";
+    private static final String password_DATABASE ="iit-bassam";
+
     Connection connection;
     public EquipeDAO(){
-       try {
-           connection = DriverManager.getConnection(URL,USERNAME,password);
-       } catch (SQLException e) {
-           throw new RuntimeException(e);
-       }
+        try {
+            connection = DriverManager.getConnection(URL_DATABASE,USERNAME_DATABASE,password_DATABASE);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
     /**
      * Ce DAO represente la logique de notre entiteEQUIPE
@@ -72,7 +73,7 @@ public class EquipeDAO {
      * @return EQUIPE
      */
     public Equipe add(String name){
-         try {
+        try {
             PreparedStatement preparedStatement = connection.prepareStatement(Equipe_INSERT);
             preparedStatement.setString(1,name);
             preparedStatement.executeUpdate();
@@ -85,7 +86,7 @@ public class EquipeDAO {
     public void update(String Nom){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(Equipe_UPDATE);
-           preparedStatement.setString(1,Nom);
+            preparedStatement.setString(1,Nom);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -104,7 +105,8 @@ public class EquipeDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-       return null;
+        return null;
     }
 
 }
+
