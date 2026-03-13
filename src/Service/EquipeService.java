@@ -5,7 +5,10 @@ import models.Equipe;
 import java.util.List;
 
 public class EquipeService {
-    private EquipeDAO equipeDAO = new EquipeDAO();
+     EquipeDAO equipeDAO;
+     public EquipeService(){
+         equipeDAO = new EquipeDAO();
+     }
 
     /**
      * Ce service represente la logique de notre entiteEQUIPE

@@ -7,7 +7,10 @@ import java.util.List;
 
 public class JoueurService {
 
-    JoueurDAO joueurDAO = new JoueurDAO();
+    JoueurDAO joueurDAO;
+    public JoueurService(){
+        joueurDAO = new JoueurDAO();
+    }
     /**
      * Cette methode nous permettra d'ajouter un Joueur dans la competitions
      * @param Nationnalite_ID

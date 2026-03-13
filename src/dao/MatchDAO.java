@@ -8,13 +8,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MatchDAO {
-    private static final String Match_INSERT = "INSERT INTO Match (poule,EquipeDomicileID,EquipeExterieurID,stade,date) VALUES(?,?,?,?,?)";
+    private static final String Match_INSERT = "INSERT INTO Match (EquipeDomicileID,EquipeExterieurID,stade,date,poule) VALUES(?,?,?,?,?)";
     private static final String Match_UPDATE = "UPDATE Match SET id = ?,poule = ?,EquipeDomicileID = ?,EquipeExterieurID = ?,stade = ?,date = ? WHERE id= ?";
     private static final String Match_FINDALL = "SELECT*FROM Match";
     private static final String Match_FINDONE = "SELECT*FROM Match WHERE id = ?";
     private static final String Match_DELETE = "DELETE FROM Match WHERE id = ?";
 
-    private static final String URL_DATABASE ="jdbc:mysql://:/mon_etab_IIT-0410";
+    private static final String URL_DATABASE ="jdbc:mysql://193.203.169.18:3306/mon_etab_IIT-0410";
     private static final String USERNAME_DATABASE ="root";
     private static final String password_DATABASE ="iit-bassam";
 
@@ -22,7 +22,7 @@ public class MatchDAO {
     private Connection connection;
     public MatchDAO(){
         try {
-            Connection connection = DriverManager.getConnection(URL_DATABASE,USERNAME_DATABASE,password_DATABASE);
+             connection = DriverManager.getConnection(URL_DATABASE,USERNAME_DATABASE,password_DATABASE);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -87,11 +87,11 @@ public class MatchDAO {
     public Match add(int EquipeDomicileID,int EquipeExterieurID , Date date, String stade, String poule){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(Match_INSERT);
-            preparedStatement.setString(1,poule);
-            preparedStatement.setInt(2,EquipeDomicileID);
-            preparedStatement.setInt(3,EquipeExterieurID);
-            preparedStatement.setString(4,stade);
-            preparedStatement.setDate(5, (java.sql.Date) date);
+            preparedStatement.setInt(1,EquipeDomicileID);
+            preparedStatement.setInt(2,EquipeExterieurID);
+            preparedStatement.setString(5,poule);
+            preparedStatement.setDate(4, (java.sql.Date) date);
+            preparedStatement.setString(3,stade);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -13,7 +13,7 @@ public class HotelDAO {
     private static String Hotel_FINDONE ="SELECT * FROM Hotel WHERE HotelID = ?";
     private static String Hotel_DELETE ="DELETE FROM Hotel WHERE HotelID = ?";
 
-    private static final String URL_DATABASE="jdbc:mysql://193.203.169.18:3306:/mon_etab_IIT-0410";
+    private static final String URL_DATABASE="jdbc:mysql://193.203.169.18:3306/mon_etab_IIT-0410";
     private static final String USERNAME_DATABASE ="root";
     private static final String password_DATABASE ="iit-bassam";
     Connection connection;

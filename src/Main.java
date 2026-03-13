@@ -58,7 +58,6 @@ public class Main {
             } while (choix != 6);
     }
     static void sousmenuMatchs() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         int choix1 = -1;
         do {
             String MenuMatchs = """
@@ -88,7 +87,26 @@ public class Main {
             } while (!choixpossibles1.contains(choix1));
             Scanner sc = new Scanner(System.in);
             if(choix1==1){
-                Matchaddandupdate();
+                System.out.println("Veuillez saisir l'Identifiant de l'équipe Domicile :");
+                int EquipeDomicileID=0;
+                VERIFICATIONSAISIE( EquipeDomicileID);
+                System.out.println("Veuillez saisir l'Identifiant de l'équipe Extérieur :");
+                int EquipeExterieurID = 0;
+                VERIFICATIONSAISIE(EquipeExterieurID);
+                System.out.println("Veuillez saisir la poule du match :");
+                String poule = sc.nextLine();
+                System.out.println("Veuillez saisir le Nom du stade :");
+                String stade = sc.nextLine();
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    System.out.println("Veuillez saisir la date du Match(yyyy-MM-dd) :");
+                    String date = sc.nextLine();
+                    Date maDate = sdf.parse(date);
+                    matchs.add(EquipeDomicileID, EquipeExterieurID, maDate, poule, stade);
+                } catch (Exception e) {
+                    System.out.println("Erreur le format saisir est incorrect");
+                }
+
                 System.out.println("ENREGISTREMENT EFFECTUER AVEC SUCCES");
             } else if (choix1 == 2) {
                 System.out.println("Veuillez saisir l'Id du Match a supprimer :");
@@ -102,10 +120,28 @@ public class Main {
                 System.out.println(match);
             }
              else if(choix1==4){
+                System.out.println("Veuillez saisir l'Identifiant de l'équipe Domicile :");
+                int EquipeDomicileID=0;
+                VERIFICATIONSAISIE( EquipeDomicileID);
+                System.out.println("Veuillez saisir l'Identifiant de l'équipe Extérieur :");
+                int EquipeExterieurID = 0;
+                VERIFICATIONSAISIE(EquipeExterieurID);
+                System.out.println("Veuillez saisir la poule du match :");
+                String poule = sc.nextLine();
+                System.out.println("Veuillez saisir le Nom du stade :");
+                String stade = sc.nextLine();
+                try {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    System.out.println("Veuillez saisir la date du Match(yyyy-MM-dd) :");
+                    String date = sc.nextLine();
+                    Date maDate = sdf.parse(date);
+                    matchs.update(EquipeDomicileID, EquipeExterieurID, maDate, poule, stade);
+                } catch (Exception e) {
+                    System.out.println("Erreur le format saisir est incorrect");
+                }
                 System.out.println("Veuillez saisir l'Id du Matchs a Modifier :");
                 int ID = 0;
                 VERIFICATIONSAISIE(ID);
-                Matchaddandupdate();
                 System.out.println("MODIFICATION EFFECTUER AVEC SUCCES");
             }
         }while(choix1 != 0);
@@ -333,29 +369,7 @@ public class Main {
     /**
      * Cette methode represente le formulaire d'ajout de Match ou de modififcationd d'un match
      */
-     static void Matchaddandupdate(){
-         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-         MatchService matchs = new MatchService();
-          Scanner sc = new Scanner(System.in);
-         System.out.println("Veuillez saisir l'Identifiant de l'équipe Domicile :");
-         int EquipeDomicileID=0;
-         VERIFICATIONSAISIE( EquipeDomicileID);
-         System.out.println("Veuillez saisir l'Identifiant de l'équipe Extérieur :");
-         int EquipeExterieurID = 0;
-         VERIFICATIONSAISIE(EquipeExterieurID);
-         System.out.println("Veuillez saisir la poule du match :");
-         String poule = sc.nextLine();
-         System.out.println("Veuillez saisir le Nom du stade :");
-         String stade = sc.nextLine();
-         try {
-             System.out.println("Veuillez saisir la date du Match(yyyy-MM-dd) :");
-             String date = sc.nextLine();
-             Date maDate = sdf.parse(date);
-             matchs.add(EquipeDomicileID, EquipeExterieurID, maDate, poule, stade);
-         } catch (Exception e) {
-             System.out.println("Erreur le format saisir est incorrect");
-         }
-     }
+
 
      static void sousmenuHotel(){
         int choix5 = -1;

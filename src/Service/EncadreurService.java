@@ -7,7 +7,10 @@ import java.util.List;
 
 public class EncadreurService {
 
-    EncadreurDAO encadreurDAO = new EncadreurDAO();
+    EncadreurDAO encadreurDAO;
+    public EncadreurService(){
+        encadreurDAO = new EncadreurDAO();
+    }
 
     /**
      * Cette methode nous permettra d'ajouter un encadreur

@@ -15,7 +15,7 @@ public class EquipeDAO {
     private static String Equipe_FINDONE = "SELECT * FROM Equipe WHERE id = ";
     private static String Equipe_DELETE = "DELETE FROM Equipe WHERE id = ?";
 
-    private static final String URL_DATABASE ="jdbc:mysql://193.203.169.18:3306:/mon_etab_IIT-0410";
+    private static final String URL_DATABASE ="jdbc:mysql://193.203.169.18:3306/mon_etab_IIT-0410";
     private static final String USERNAME_DATABASE ="root";
     private static final String password_DATABASE ="iit-bassam";
 

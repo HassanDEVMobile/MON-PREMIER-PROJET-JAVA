@@ -7,7 +7,10 @@ import java.util.List;
 
 public class HotelService {
 
-   HotelDAO hotelDAO = new HotelDAO();
+   HotelDAO hotelDAO ;
+   public HotelService(){
+       hotelDAO = new HotelDAO();
+   }
     /**
      * Cette methode nous permettra d'ajouter un hotel
      * @param Nationnalite_ID

@@ -13,18 +13,23 @@ import java.util.List;
  */
 
 public class MatchService {
-    private MatchDAO macthDAO = new MatchDAO();
+     MatchDAO matchDOA;
+
+   public MatchService(){
+       matchDOA = new MatchDAO();
+   }
+
     /**
      * Cette methode permet de lister les Matchs
      * @return List<MATCH>
      */
     public List<Match> findAll(){
 
-        return macthDAO.findAll();
+        return matchDOA .findAll();
     }
 
     public Match findDone(int id){
-        return macthDAO.findDone(id);
+        return matchDOA .findDone(id);
     }
 
     /**
@@ -35,7 +40,7 @@ public class MatchService {
      * @return Ce paramettre permet de returner les Match
      */
     public Match add( int EquipeDomicileID,int EquipeExterieurID , Date date, String stade, String poule){
-        return macthDAO.add( EquipeDomicileID,EquipeExterieurID ,date,stade,poule);
+        return matchDOA.add( EquipeDomicileID,EquipeExterieurID ,date,stade,poule);
     }
 
     /**
@@ -44,10 +49,10 @@ public class MatchService {
      */
     public void delete(int id){
 
-        macthDAO.delete(id);
+        matchDOA .delete(id);
     }
 
     public void update(int EquipeDomicileID,int EquipeExterieurID , Date date, String stade, String poule){
-        macthDAO.update( EquipeDomicileID,EquipeExterieurID ,date,stade,poule);
+        matchDOA .update( EquipeDomicileID,EquipeExterieurID ,date,stade,poule);
     }
 }

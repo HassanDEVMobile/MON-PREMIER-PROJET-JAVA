@@ -13,7 +13,7 @@ public class JoueurDAO {
     private static String Joueur_FINDONE ="SELECT * FROM Joueur WHERE JoueurID = ? ";
     private static String Joueur_DELETE ="DELETE FROM Joueur WHERE JoueurID = ?";
 
-    private static final String URL_DATABASE="jdbc:mysql://193.203.169.18:3306:/mon_etab_IIT-0410";
+    private static final String URL_DATABASE="jdbc:mysql://193.203.169.18:3306/mon_etab_IIT-0410";
     private static final String USERNAME_DATABASE ="root";
     private static final String password_DATABASE ="iit-bassam";
     Connection connection;
