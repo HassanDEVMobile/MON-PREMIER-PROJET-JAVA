@@ -14,7 +14,7 @@ public class EncadreurDAO {
     private static String Encadreur_FINDONE ="SELECT * FROM Encadreur WHERE Encad_ID = ?";
     private static String Encadreur_DELETE ="DELETE FROM Encadreur WHERE Encad_ID = ?";
 
-    private static final String URL_DATABASE ="jdbc:mysql://193.203.169.18:3306/mon_etab_IIT-0410";
+    private static final String URL_DATABASE ="jdbc:mysql://193.203.169.18:3306/App_can2024";
     private static final String USERNAME_DATABASE ="root";
     private static final String password_DATABASE ="iit-bassam";
 

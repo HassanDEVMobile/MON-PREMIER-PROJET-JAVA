@@ -18,6 +18,16 @@ public class Joueur {
         this.club = club;
     }
 
+    public String toString(){
+        return """
+                ID :
+                NATION ID : 
+                NOM ET PRENOM : 
+                age : 
+                poste : 
+                club : 
+                """.formatted(JoueurID,Nationnalite_ID, Nom_Prenom,age,poste, club);
+    }
 
 
 

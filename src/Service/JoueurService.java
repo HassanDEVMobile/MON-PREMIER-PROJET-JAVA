@@ -25,7 +25,7 @@ public class JoueurService {
      * Cette methode nous permettra de modifier un joueur grace a son identifiant
      * @param Nationnalite_ID
      */
-    public void update(int JoueurID,int Nationnalite_ID,String Nom_Prenom,int age,String poste,String club){
+    public void update(int JoueurID, int Nationnalite_ID,String Nom_Prenom, int age, String poste,String club){
         joueurDAO.update(JoueurID,Nationnalite_ID,Nom_Prenom, age,poste,club);
     }
 

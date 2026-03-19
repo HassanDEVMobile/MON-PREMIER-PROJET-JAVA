@@ -15,7 +15,7 @@ public class EquipeDAO {
     private static String Equipe_FINDONE = "SELECT * FROM Equipe WHERE id = ";
     private static String Equipe_DELETE = "DELETE FROM Equipe WHERE id = ?";
 
-    private static final String URL_DATABASE ="jdbc:mysql://193.203.169.18:3306/mon_etab_IIT-0410";
+    private static final String URL_DATABASE ="jdbc:mysql://193.203.169.18:3306/App_can2024";
     private static final String USERNAME_DATABASE ="root";
     private static final String password_DATABASE ="iit-bassam";
 
@@ -62,6 +62,7 @@ public class EquipeDAO {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(Equipe_DELETE);
             preparedStatement.setInt(1,id);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -83,10 +84,13 @@ public class EquipeDAO {
         return null;
     }
 
-    public void update(String Nom){
+    public void update(int id,String Nom){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(Equipe_UPDATE);
             preparedStatement.setString(1,Nom);
+            preparedStatement.setInt(2,id);
+            preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

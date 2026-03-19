@@ -8,12 +8,12 @@ import java.util.List;
 
 public class JoueurDAO {
     private static String Joueur_INSERT = "INSERT INTO Joueur (Nationnalite_ID,Nom_Prenom, age,poste,club) VALUES (?,?,?,?,?)";
-    private static String Joueur_UPDATE ="UPDATE Joueur SET JoueurID = ?,Nationnalite_ID = ?,Nom_Prenom = ?,age = ?,poste = ?,club = ? WHERE JoueurID = ?";
+    private static String Joueur_UPDATE ="UPDATE Joueur SET Nationnalite_ID = ?,Nom_Prenom = ?,age = ?,poste = ?,club = ? WHERE JoueurID = ?";
     private static String Joueur_FINDALL ="SELECT * FROM Joueur ";
     private static String Joueur_FINDONE ="SELECT * FROM Joueur WHERE JoueurID = ? ";
     private static String Joueur_DELETE ="DELETE FROM Joueur WHERE JoueurID = ?";
 
-    private static final String URL_DATABASE="jdbc:mysql://193.203.169.18:3306/mon_etab_IIT-0410";
+    private static final String URL_DATABASE="jdbc:mysql://193.203.169.18:3306/App_can2024";
     private static final String USERNAME_DATABASE ="root";
     private static final String password_DATABASE ="iit-bassam";
     Connection connection;
@@ -52,12 +52,12 @@ public class JoueurDAO {
     public void update(int JoueurID,int Nationnalite_ID,String Nom_Prenom,int age,String poste,String club){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(Joueur_UPDATE);
-            preparedStatement.setInt(1,JoueurID);
-            preparedStatement.setInt(2,Nationnalite_ID);
-            preparedStatement.setString(3,Nom_Prenom);
-            preparedStatement.setInt(4,age);
-            preparedStatement.setString(5,poste);
-            preparedStatement.setString(6,club);
+            preparedStatement.setInt(1,Nationnalite_ID);
+            preparedStatement.setString(2,Nom_Prenom);
+            preparedStatement.setInt(3,age);
+            preparedStatement.setString(4,poste);
+            preparedStatement.setString(5,club);
+            preparedStatement.setInt(6,JoueurID);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -71,9 +71,9 @@ public class JoueurDAO {
      * @return
      */
     public Joueur findOne(int JoueurID){
-
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(Joueur_FINDONE);
+            preparedStatement.setInt(1,JoueurID);
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()) {
                 JoueurID = resultSet.getInt("JoueurID");
@@ -83,12 +83,13 @@ public class JoueurDAO {
                 String poste = resultSet.getNString("poste");
                 String club = resultSet.getNString("club");
                 Joueur joueur = new Joueur( JoueurID, Nationnalite_ID, Nom_Prenom, age, poste, club);
-                return joueur;
+                  return joueur;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return null;
+
     }
 
     /**
@@ -109,6 +110,7 @@ public class JoueurDAO {
                 String club = resultSet.getNString("club");
                 Joueur joueur = new Joueur( JoueurID, Nationnalite_ID, Nom_Prenom, age, poste, club);
                 joueurs.add(joueur);
+               // System.out.println("ID: "+JoueurID+" NATION ID :"+Nationnalite_ID+" Nom_Prenom :"+Nom_Prenom+" age :"+age+" poste:"+poste+"club:"+club);
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
