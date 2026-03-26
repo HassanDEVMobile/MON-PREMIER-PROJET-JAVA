@@ -9,7 +9,7 @@ import java.util.List;
 
 public class EncadreurDAO {
     private static String Encadreur_INSERT ="INSERT INTO Encadreur (Nationnalite_ID, Nom_Prenom, age, role) VALUES (?,?,?,?)";
-    private static String Encadreur_UPDATE ="UPDATE Encadreur SET Encad_ID = ?,Nationnalite_ID = ?,Nom_Prenom = ?,age = ?,role = ? WHERE Encad_ID = ?";
+    private static String Encadreur_UPDATE ="UPDATE Encadreur SET Nationnalite_ID = ?,Nom_Prenom = ?,age = ?,role = ? WHERE Encad_ID = ?";
     private static String Encadreur_FINDALL ="SELECT * FROM Encadreur";
     private static String Encadreur_FINDONE ="SELECT * FROM Encadreur WHERE Encad_ID = ?";
     private static String Encadreur_DELETE ="DELETE FROM Encadreur WHERE Encad_ID = ?";
@@ -60,11 +60,11 @@ public class EncadreurDAO {
     public void update(int Encad_ID, int  Nationnalite_ID,String Nom_Prenom,int age,String role){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(Encadreur_UPDATE);
-            preparedStatement.setInt(1,Encad_ID);
-            preparedStatement.setInt(2,Nationnalite_ID);
-            preparedStatement.setString(3,Nom_Prenom);
-            preparedStatement.setInt(4,age);
-            preparedStatement.setString(5,role);
+            preparedStatement.setInt(1,Nationnalite_ID);
+            preparedStatement.setString(2,Nom_Prenom);
+            preparedStatement.setInt(3,age);
+            preparedStatement.setString(4,role);
+            preparedStatement.setInt(5, Encad_ID);
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -97,7 +97,7 @@ public class EncadreurDAO {
         List<Encadreur> encadreurList = new LinkedList<>();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(Encadreur_FINDALL);
-            ResultSet resultSet = preparedStatement.getResultSet();
+            ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
                 int Encad_ID = resultSet.getInt("Encad_ID");
                 int  Nationnalite_ID = resultSet.getInt("Nationnalite_ID");
@@ -123,6 +123,7 @@ public class EncadreurDAO {
     public Encadreur findOne(int  Encad_ID) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(Encadreur_FINDONE);
+            preparedStatement.setInt(1,Encad_ID);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 Encad_ID = resultSet.getInt("Encad_ID");

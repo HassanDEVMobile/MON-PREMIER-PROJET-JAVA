@@ -1,11 +1,5 @@
-import Service.EncadreurService;
-import Service.EquipeService;
-import Service.JoueurService;
-import Service.MatchService;
-import models.Encadreur;
-import models.Equipe;
-import models.Joueur;
-import models.Match;
+import Service.*;
+import models.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -91,15 +85,14 @@ public class Main {
             Scanner sc = new Scanner(System.in);
             if(choix1==1){
                 System.out.println("Veuillez saisir l'Identifiant de l'équipe Domicile :");
-                int EquipeDomicileID=0;
-                VERIFICATIONSAISIE( EquipeDomicileID);
+                int EquipeDomicileID=sc.nextInt();
                 System.out.println("Veuillez saisir l'Identifiant de l'équipe Extérieur :");
-                int EquipeExterieurID = 0;
-                VERIFICATIONSAISIE(EquipeExterieurID);
+                int EquipeExterieurID = sc.nextInt();
+                sc.nextLine();
                 System.out.println("Veuillez saisir la poule du match :");
                 String poule = sc.nextLine();
                 System.out.println("Veuillez saisir le Nom du stade :");
-                String stade = sc.next();
+                String stade = sc.nextLine();
                 System.out.println("Veuillez saisir la date du Match(yyyy-MM-dd) :");
                 sc.nextLine();
                 String date = sc.nextLine();
@@ -192,9 +185,8 @@ public class Main {
                else if(choix2==2){
 
                   System.out.println("Veuillez saisir l'Id de l'equipe a supprimer :");
-                  int Id = 0;
-                  VERIFICATIONSAISIE(Id);
-                  equipe.Delete(Id);
+                  int id = sc.nextInt();
+                  equipe.Delete(id);
                   System.out.println("Equipe Supprimer avec succes ");
               }
                else if(choix2==3){
@@ -203,8 +195,8 @@ public class Main {
               }
                else if(choix2==4){
                   System.out.println("Veuillez saisir l'identifiant de l'equipe :");
-                  int id = 0;
-                  VERIFICATIONSAISIE(id);
+                  int id = sc.nextInt();
+                  sc.nextLine();
                   System.out.println("Veuillez saisir le nouveau nom de l'equipe :");
                   String name = sc.nextLine();
                   equipe.update(id,name);
@@ -262,16 +254,14 @@ public class Main {
                else if(choix3 == 2){
                   System.out.println("Veuillez saisir l'ID du joueur a Modifier :");
                   int JoueurID = sc.nextInt();
-                  VERIFICATIONSAISIE(JoueurID);
                   System.out.println("Veuillez saisir l'ID de la nation du joueur :");
-                  int Nationnalite_ID = 0;
-                  VERIFICATIONSAISIE(Nationnalite_ID);
+                  int Nationnalite_ID = sc.nextInt();
                   sc.nextLine();
                   System.out.println("Veuillez saisir le nom et le prenom du joueur :");
                   String Nom_Prenom = sc.nextLine();
                   System.out.println("Veuillez saisir l'age du joueur :");
-                  int age = 0;
-                  VERIFICATIONSAISIE(age);
+                  int age = sc.nextInt();
+                  sc.nextLine();
                   System.out.println("Veuillez saisir le poste du joueur :");
                   String poste = sc.nextLine();
                   System.out.println("Veuillez saisir le club dub joueur :");
@@ -288,10 +278,9 @@ public class Main {
 
               } else if (choix3==5) {
                   System.out.println("Veuillez saisir l'ID du joueur que vous voulez recherché :");
-                  int JoueurID = 0;
-                  VERIFICATIONSAISIE(JoueurID);
+                  int JoueurID = sc.nextInt();
                   Joueur joueur = joueurService.findOne(JoueurID);
-                  System.out.println(joueur);
+                  System.out.println(joueur.toString());
               }
         }while(choix3 != 6);
 
@@ -299,7 +288,8 @@ public class Main {
 
     static void sousmenuEncadreur(){
         int choix4 =-1;
-        String sousmenuencadreur = """
+        do{
+            String sousmenuencadreur = """
                 ===================================================
                                  MENU ENCADREUR 
                 ===================================================
@@ -311,68 +301,65 @@ public class Main {
                 5-RECHERCHER UN ENCADREUR
                 6-QUITTER
                 """;
-        System.out.println(sousmenuencadreur);
-        List<Integer> choixposssibles4 = Arrays.asList(1,2,3,4,5,6);
-        Scanner sc = new Scanner(System.in);
-        EncadreurService encadreurService = new EncadreurService();
-        do{
-            try{
-                System.out.println("Veuillez faire un choix :");
-                choix4 = sc.nextInt();
-                if( ! choixposssibles4.contains(choix4)){
-                    System.out.println("Choix invalide");
+            System.out.println(sousmenuencadreur);
+            List<Integer> choixposssibles4 = Arrays.asList(1,2,3,4,5,6);
+            Scanner sc = new Scanner(System.in);
+            EncadreurService encadreurService = new EncadreurService();
+            do{
+                try{
+                    System.out.println("Veuillez faire un choix :");
+                    choix4 = sc.nextInt();
+                    if( ! choixposssibles4.contains(choix4)){
+                        System.out.println("Choix invalide");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Ce champs ne doit pas contenir des caractere");
                 }
-            } catch (Exception e) {
-                System.out.println("Ce champs ne doit pas contenir des caractere");
+            }while(!choixposssibles4.contains(choix4));
+            if(choix4 == 1){
+                System.out.println("Veuillez saisir l'ID du pays de l'encadreur:");
+                int Nationnalite_ID = sc.nextInt();
+                sc.nextLine();
+                System.out.println("Veuillez entrer le nom et prenom de l'encadreur :");
+                String Nom_Prenom = sc.nextLine();
+                System.out.println("Veuillez saisir l'age de l'encadreur :");
+                int age = sc.nextInt();
+                sc.nextLine();
+                System.out.println("Veuillez saisir le role de l'encadreur :");
+                String role = sc.nextLine();
+                encadreurService.add(Nationnalite_ID, Nom_Prenom, age, role);
+            }else if(choix4 == 2){
+                System.out.println("Veuillez saisir l'ID de l'encadreur a modifier :");
+                int Encad_ID = sc.nextInt();
+                sc.nextLine();
+                System.out.println("Veuillez saisir l'ID du pays de l'encadreur:");
+                int Nationnalite_ID = sc.nextInt();
+                sc.nextLine();
+                System.out.println("Veuillez entrer le nom et prenom de l'encadreur :");
+                String Nom_Prenom = sc.nextLine();
+                System.out.println("Veuillez saisir l'age de l'encadreur :");
+                int age = sc.nextInt();
+                System.out.println("Veuillez saisir le role de l'encadreur :");
+                String role = sc.nextLine();
+                encadreurService.update(Encad_ID,Nationnalite_ID, Nom_Prenom, age,role );
+
+            }else if(choix4 == 3){
+                System.out.println("Veuillez saisir L'ID de l'encadreur a supprimer :");
+                int  Encad_ID = sc.nextInt();
+                encadreurService.delete(Encad_ID);
+            }else if(choix4 == 4){
+                List<Encadreur> encadreurList = encadreurService.findAll();
+                System.out.println(encadreurList);
+            }else if(choix4 == 5){
+                System.out.println("Veuillez saisir l'ID de l'encadreur a rechercher :");
+                int Encad_ID = sc.nextInt();
+                Encadreur  encadreur = encadreurService.findOne(Encad_ID);
+                System.out.println(encadreur);
             }
-        }while(!choixposssibles4.contains(choix4));
-        if(choix4 == 1){
-            System.out.println("Veuillez saisir l'ID du pays de l'encadreur:");
-            int Nationnalite_ID = sc.nextInt();
-            sc.nextLine();
-            VERIFICATIONSAISIE(Nationnalite_ID);
-            System.out.println("Veuillez entrer le nom et prenom de l'encadreur :");
-            String Nom_Prenom = sc.nextLine();
-            System.out.println("Veuillez saisir l'age de l'encadreur :");
-            int age = sc.nextInt();
-            sc.nextLine();
-            System.out.println("Veuillez saisir le role de l'encadreur :");
-            String role = sc.nextLine();
-            encadreurService.add(Nationnalite_ID, Nom_Prenom, age, role);
-        }else if(choix4 == 2){
-            System.out.println("Veuillez saisir l'ID de l'encadreur a modifier :");
-            int ID_modif = sc.nextInt();
-            VERIFICATIONSAISIE(ID_modif);
-            System.out.println("Veuillez saisir le nouvelle ID de l'encadreur :");
-            int Encad_ID = sc.nextInt();
-            System.out.println("Veuillez saisir l'ID du pays de l'encadreur:");
-            int Nationnalite_ID = sc.nextInt();
-            VERIFICATIONSAISIE(Nationnalite_ID);
-            System.out.println("Veuillez entrer le nom et prenom de l'encadreur :");
-            String Nom_Prenom = sc.nextLine();
-            System.out.println("Veuillez saisir l'age de l'encadreur :");
-            int age = sc.nextInt();
-            System.out.println("Veuillez saisir le role de l'encadreur :");
-            String role = sc.nextLine();
-            encadreurService.update(Encad_ID,Nationnalite_ID, Nom_Prenom, age,role );
+        }while(choix4 != 6);
 
-        }else if(choix4 == 3){
-            System.out.println("Veuillez saisir L'ID de l'encadreur a supprimer :");
-           int  Encad_ID = sc.nextInt();
-           VERIFICATIONSAISIE(Encad_ID);
-           encadreurService.delete(Encad_ID);
-        }else if(choix4 == 4){
-            List<Encadreur> encadreurList = encadreurService.findAll();
-            System.out.println(encadreurList);
-        }else if(choix4 == 5){
-            System.out.println("Veuillez saisir l'ID de l'encadreur a rechercher :");
-            int Encad_ID = sc.nextInt();
-            VERIFICATIONSAISIE(Encad_ID);
-            Encadreur  encadreur = encadreurService.findOne(Encad_ID);
-            System.out.println(encadreur);
-        }
 
-    }
+}
 
     /**
      * Cette methode represente le formulaire d'ajout de Match ou de modififcationd d'un match
@@ -383,6 +370,9 @@ public class Main {
         int choix5 = -1;
         do{
             String sousmenuHotel = """
+                ==============================================
+                              MENU HOTELS 
+                ==============================================
                 1-AJOUTER UN HOTEL
                 2-MODIFIER UN HOTEL
                 3-SUPPRIMER UN HOTEL
@@ -393,7 +383,7 @@ public class Main {
             System.out.println(sousmenuHotel);
             List<Integer> choixposssibles5 = Arrays.asList(1,2,3,4,5,6);
             Scanner sc = new Scanner(System.in);
-            EncadreurService encadreurService = new EncadreurService();
+             HotelService hotel = new HotelService();
             do{
                 try{
                     System.out.println("Veuillez faire un choix :");
@@ -405,6 +395,43 @@ public class Main {
                     System.out.println("Ce champs ne doit pas contenir des caractere");
                 }
             }while(!choixposssibles5.contains(choix5));
+            if(choix5==1){
+                System.out.println("Veuillez saisir l'Id de la nation qui qui residera dans l'hotel :");
+                int Nationnalite_ID  = sc.nextInt();
+                sc.nextLine();
+                System.out.println("Veuillez saisir le nom de l'hotel :");
+                String Nom = sc.nextLine();
+                System.out.println("veuillez saisir l'email de l'hotel :");
+                String email = sc.nextLine();
+                System.out.println("Veuillez saisir votre localisation :");
+                String Localisation = sc.nextLine();
+                hotel.add(Nationnalite_ID,Nom,email,Localisation);
+            }else if(choix5==2){
+                System.out.println("Veuillez saisir l'Id de l'Hotel a modifier :");
+                int HotelID = sc.nextInt();
+                System.out.println("Veuillez saisir l'Id de la nation qui qui residera dans l'hotel :");
+                int Nationnalite_ID  = sc.nextInt();
+                sc.nextLine();
+                System.out.println("Veuillez saisir le nom de l'hotel :");
+                String Nom = sc.nextLine();
+                System.out.println("veuillez saisir l'email de l'hotel :");
+                String email = sc.nextLine();
+                System.out.println("Veuillez saisir votre localisation :");
+                String Localisation = sc.nextLine();
+                hotel.update(HotelID,Nationnalite_ID,Nom,email,Localisation);
+            }else if(choix5==3){
+                System.out.println("Veuillez saisir l'Id de l'Hotel a supprimer :");
+                int HotelID = sc.nextInt();
+                hotel.delete(HotelID);
+            }else if(choix5==4){
+               List<Hotel> hotelList = hotel.findAll();
+                System.out.println(hotelList.toString());
+            }else if(choix5==5){
+                System.out.println("Veuillez saisir l'Id de l'Hotel a modifier :");
+                int HotelID = sc.nextInt();
+               Hotel hotelocc = hotel.findOne(HotelID);
+                System.out.println(hotelocc.toString());
+            }
         }while(choix5 != 6);
 
      }
@@ -426,14 +453,14 @@ public class Main {
     /**
      *
      */
-    private static void VERIFICATIONSAISIEDETYPECHAINE (String name){
+    private static void VERIFICATIONSAISIEDETYPECHAINE (int name){
         Scanner sc = new Scanner(System.in);
         while(!sc.hasNextLine()){
             System.out.println("La saisie ne doit contenir que des caractere");
             System.out.println("Veuillez ressayer :");
             sc.next();
         }
-        name = sc.nextLine();
+        name = sc.nextInt();
     }
 }
 

@@ -13,9 +13,13 @@ public class JoueurDAO {
     private static String Joueur_FINDONE ="SELECT * FROM Joueur WHERE JoueurID = ? ";
     private static String Joueur_DELETE ="DELETE FROM Joueur WHERE JoueurID = ?";
 
-    private static final String URL_DATABASE="jdbc:mysql://193.203.169.18:3306/App_can2024";
+    private static final String URL_DATABASE ="jdbc:mysql://193.203.169.18:3306/App_can2024";
     private static final String USERNAME_DATABASE ="root";
     private static final String password_DATABASE ="iit-bassam";
+
+
+
+
     Connection connection;
     public JoueurDAO(){
         try {
@@ -70,20 +74,20 @@ public class JoueurDAO {
      * @param JoueurID
      * @return
      */
-    public Joueur findOne(int JoueurID){
+    public Joueur findOne(int JoueurID) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(Joueur_FINDONE);
-            preparedStatement.setInt(1,JoueurID);
+            preparedStatement.setInt(1, JoueurID);
             ResultSet resultSet = preparedStatement.executeQuery();
-            if(resultSet.next()) {
+            if (resultSet.next()) {
                 JoueurID = resultSet.getInt("JoueurID");
                 int Nationnalite_ID = resultSet.getInt("Nationnalite_ID");
                 String Nom_Prenom = resultSet.getNString("Nom_Prenom");
                 int age = resultSet.getInt("age");
                 String poste = resultSet.getNString("poste");
                 String club = resultSet.getNString("club");
-                Joueur joueur = new Joueur( JoueurID, Nationnalite_ID, Nom_Prenom, age, poste, club);
-                  return joueur;
+              Joueur  joueur = new Joueur(JoueurID, Nationnalite_ID, Nom_Prenom, age, poste, club);
+               return joueur;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

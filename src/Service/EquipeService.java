@@ -29,7 +29,7 @@ public class EquipeService {
          * @param id ce paramettre represente l'identifiant d'une equipe
          */
         public void Delete(int id){
-
+            equipeDAO.Delete(id);
         }
 
         /**

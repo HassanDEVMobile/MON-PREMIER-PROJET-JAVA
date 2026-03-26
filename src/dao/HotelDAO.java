@@ -8,14 +8,14 @@ import java.util.List;
 
 public class HotelDAO {
     private static String Hotel_INSERT ="INSERT INTO Hotel (Nationnalite_ID, Nom,email,Localisation) VALUES (?,?,?,?)";
-    private static String Hotel_UPDATE ="UPDATE Hotel SET HotelID = ?,Nationnalite_ID = ?,Nom = ?,email = ?,Localisation = ? WHERE HotelID = ?";
+    private static String Hotel_UPDATE ="UPDATE Hotel SET Nationnalite_ID = ?,Nom = ?,email = ?,Localisation = ? WHERE HotelID = ?";
     private static String Hotel_FINDALL ="SELECT * FROM Hotel";
     private static String Hotel_FINDONE ="SELECT * FROM Hotel WHERE HotelID = ?";
     private static String Hotel_DELETE ="DELETE FROM Hotel WHERE HotelID = ?";
 
-    private static final String URL_DATABASE="jdbc:mysql://193.203.169.18:3306/App_can2024";
+    private static final String URL_DATABASE="jdbc:mysql://localhost:3306/AppCan2024";
     private static final String USERNAME_DATABASE ="root";
-    private static final String password_DATABASE ="iit-bassam";
+    private static final String password_DATABASE ="";
     Connection connection;
     public HotelDAO(){
         try {
@@ -54,6 +54,7 @@ public class HotelDAO {
     public Hotel findOne(int HotelID){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(Hotel_FINDONE);
+            preparedStatement.setInt(1,HotelID);
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next()){
                 HotelID = resultSet.getInt("HotelID");

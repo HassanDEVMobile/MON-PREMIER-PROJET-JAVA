@@ -15,5 +15,15 @@ public class Hotel {
         this.Localisation = Localisation;
     }
 
+    public String toString(){
+        return """
+                ID : %s
+                NATION ID : %s 
+                HOTEL NOM : %s
+                EMAILS : %s 
+                LOCALISATION : %s
+                """.formatted(HotelID,Nationnalite_ID,Nom,emails,Localisation);
+    }
+
 
 }

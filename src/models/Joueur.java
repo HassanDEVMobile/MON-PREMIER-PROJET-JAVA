@@ -20,12 +20,12 @@ public class Joueur {
 
     public String toString(){
         return """
-                ID :
-                NATION ID : 
-                NOM ET PRENOM : 
-                age : 
-                poste : 
-                club : 
+                ID :%s
+                NATION ID : %s
+                NOM ET PRENOM : %s
+                age : %s
+                poste : %s
+                club : %s
                 """.formatted(JoueurID,Nationnalite_ID, Nom_Prenom,age,poste, club);
     }
 

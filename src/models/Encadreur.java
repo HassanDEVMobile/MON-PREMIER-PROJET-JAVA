@@ -14,4 +14,14 @@ public class Encadreur {
         this.age = age;
         this.role = role;
     }
+
+    public String toString(){
+        return """
+                ID : %s
+                NATION ID : %s
+                Nom_PRENOM : %s
+                AGE : %s
+                ROLE : %s
+                """.formatted(Encad_ID,Nationnalite_ID,Nom_Prenom,age,role);
+    }
 }

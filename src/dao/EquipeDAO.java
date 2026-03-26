@@ -19,6 +19,10 @@ public class EquipeDAO {
     private static final String USERNAME_DATABASE ="root";
     private static final String password_DATABASE ="iit-bassam";
 
+
+
+
+
     Connection connection;
     public EquipeDAO(){
         try {

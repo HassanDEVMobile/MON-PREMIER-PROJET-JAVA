@@ -14,9 +14,9 @@ public class MatchDAO {
     private static final String Match_FINDONE = "SELECT*FROM Match WHERE id = ?";
     private static final String Match_DELETE = "DELETE FROM Match WHERE id = ?";
 
-    private static final String URL_DATABASE ="jdbc:mysql://193.203.169.18:3306/App_can2024";
+    private static final String URL_DATABASE ="jdbc:mysql://localhost:3306/AppCan2024";
     private static final String USERNAME_DATABASE ="root";
-    private static final String password_DATABASE ="iit-bassam";
+    private static final String password_DATABASE ="";
 
 
     private Connection connection;

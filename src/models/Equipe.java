@@ -11,4 +11,11 @@ public class Equipe {
    public Equipe(){
 
    }
+   public String toString(){
+      return """
+              ID : %s
+              Nom : %s
+              """.formatted(id,Nom);
+
+   }
 }
