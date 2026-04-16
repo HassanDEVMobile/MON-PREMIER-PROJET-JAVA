@@ -2,6 +2,9 @@ import Service.*;
 import models.*;
 
 import java.text.SimpleDateFormat;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +13,7 @@ import java.util.Scanner;
 
 public class Main {
     Scanner sc = new Scanner(System.in);
+
     public static void main(String[] args) {
         int choix = -1;
 
@@ -55,6 +59,9 @@ public class Main {
             } while (choix != 6);
     }
     static void sousmenuMatchs() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate localDate = null;
+        Boolean valide = false;
         int choix1 = -1;
         do {
             String MenuMatchs = """
@@ -93,24 +100,13 @@ public class Main {
                 String poule = sc.nextLine();
                 System.out.println("Veuillez saisir le Nom du stade :");
                 String stade = sc.nextLine();
-                System.out.println("Veuillez saisir la date du Match(yyyy-MM-dd) :");
-                sc.nextLine();
+                System.out.println("Veuillez saisir la date du Match(dd/MM/yyyy) : ");
                 String date = sc.nextLine();
-                System.out.println("la date est :"+date);
-
-                try {
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    Date maDate = sdf.parse(date);
-                    matchs.add(EquipeDomicileID, EquipeExterieurID, maDate, poule, stade);
-                } catch (Exception e) {
-                    System.out.println("Erreur le format saisir est incorrect");
-                }
-
+                matchs.add(EquipeDomicileID, EquipeExterieurID, poule, stade,date);
                 System.out.println("ENREGISTREMENT EFFECTUER AVEC SUCCES");
             } else if (choix1 == 2) {
                 System.out.println("Veuillez saisir l'Id du Match a supprimer :");
-                int Id = 0;
-                VERIFICATIONSAISIE(Id);
+                int Id = sc.nextInt();
                 matchs.delete(Id);
                 System.out.println("Matchs Supprimer avec succes");
             }
@@ -119,29 +115,21 @@ public class Main {
                 System.out.println(match);
             }
              else if(choix1==4){
+                System.out.println("Veuillez saisir l'Id du Matchs a Modifier :");
+                int id = sc.nextInt();
                 System.out.println("Veuillez saisir l'Identifiant de l'équipe Domicile :");
-                int EquipeDomicileID=0;
-                VERIFICATIONSAISIE( EquipeDomicileID);
+                int EquipeDomicileID= sc.nextInt();
                 System.out.println("Veuillez saisir l'Identifiant de l'équipe Extérieur :");
-                int EquipeExterieurID = 0;
-                VERIFICATIONSAISIE(EquipeExterieurID);
+                int EquipeExterieurID = sc.nextInt();
+                sc.nextLine();
                 System.out.println("Veuillez saisir la poule du match :");
                 String poule = sc.nextLine();
                 System.out.println("Veuillez saisir le Nom du stade :");
                 String stade = sc.nextLine();
-                try {
-                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                    System.out.println("Veuillez saisir la date du Match(yyyy-MM-dd) :");
-                    String date = sc.nextLine();
-                    Date maDate = sdf.parse(date);
-                    matchs.update(EquipeDomicileID, EquipeExterieurID, maDate, poule, stade);
-                } catch (Exception e) {
-                    System.out.println("Erreur le format saisir est incorrect");
-                }
-                System.out.println("Veuillez saisir l'Id du Matchs a Modifier :");
-                int ID = 0;
-                VERIFICATIONSAISIE(ID);
+                System.out.println("Veuillez saisir la date du Match(yyyy/MM/dd) :");
+                String Date = sc.nextLine();
                 System.out.println("MODIFICATION EFFECTUER AVEC SUCCES");
+                matchs.update(EquipeDomicileID,EquipeExterieurID,poule,stade,Date,id);
             }
         }while(choix1 != 0);
     }
@@ -157,10 +145,11 @@ public class Main {
                       2-Supprimer une Equipe
                       3-Lister toutes les Equipes
                       4-Modifier une Equipe
-                      5-Retour Au Menu principal
+                      5-Rechercher une Equipe
+                      6-Retour Au Menu principal
                       """;
               System.out.println(sousmenuEquipes);
-              List<Integer> choixpossibles2 = Arrays.asList(1,2,3,4,5);
+              List<Integer> choixpossibles2 = Arrays.asList(1,2,3,4,5,6);
               EquipeService equipe = new EquipeService();
               do{
                   try {
@@ -179,7 +168,6 @@ public class Main {
               if(choix2==1){
                   System.out.println("Veuillez saisir le nom de l'équipe");
                   String Nom = sc.nextLine();
-                  equipe.add(Nom);
                   System.out.println("Equipe ajouter avec succes");
               }
                else if(choix2==2){
@@ -202,7 +190,13 @@ public class Main {
                   equipe.update(id,name);
                   System.out.println("MODIFICATION EFFECTUER AVEC SUCCES");
               }
-          }while(choix2 != 5);
+               else if(choix2==5){
+                  System.out.println("Veuillez saisir l'Id de l'equipe a recherchez :");
+                  int id = sc.nextInt();
+                 // Equipe equipesrc = equipe.findOne(id);
+                  System.out.println(equipe.findOne(id));
+              }
+          }while(choix2 != 6);
     }
 
     static void sousmenuJoueur(){
@@ -226,7 +220,7 @@ public class Main {
             JoueurService joueurService = new JoueurService();
             do{
                 try{
-                    System.out.println("Veuillez faire votre choix ;");
+                    System.out.println("Veuillez faire votre choix :");
                     choix3 = sc.nextInt();
                     if( !choixpossible3.contains(choix3)){
                         System.out.println("Choix invalide");
@@ -237,14 +231,13 @@ public class Main {
             }while(!choixpossible3.contains(choix3));
               if(choix3 == 1){
                   System.out.println("Veuillez saisir l'ID de la nation du joueur :");
-                  int Nationnalite_ID = 0;
-                  VERIFICATIONSAISIE(Nationnalite_ID);
+                  int Nationnalite_ID = sc.nextInt();
                   sc.nextLine();
                   System.out.println("Veuillez saisir le nom et le prenom du joueur :");
                   String Nom_Prenom = sc.nextLine();
                   System.out.println("Veuillez saisir l'age du joueur :");
-                  int age =0;
-                  VERIFICATIONSAISIE(age);
+                  int age = sc.nextInt();
+                  sc.nextLine();
                   System.out.println("Veuillez saisir le poste du joueur :");
                   String poste = sc.nextLine();
                   System.out.println("Veuillez saisir le club dub joueur :");
@@ -279,8 +272,8 @@ public class Main {
               } else if (choix3==5) {
                   System.out.println("Veuillez saisir l'ID du joueur que vous voulez recherché :");
                   int JoueurID = sc.nextInt();
-                  Joueur joueur = joueurService.findOne(JoueurID);
-                  System.out.println(joueur.toString());
+                  //Joueur joueur = joueurService.findOne(JoueurID);
+                  System.out.println( joueurService.findOne(JoueurID));
               }
         }while(choix3 != 6);
 
@@ -361,11 +354,6 @@ public class Main {
 
 }
 
-    /**
-     * Cette methode represente le formulaire d'ajout de Match ou de modififcationd d'un match
-     */
-
-
      static void sousmenuHotel(){
         int choix5 = -1;
         do{
@@ -418,7 +406,7 @@ public class Main {
                 String email = sc.nextLine();
                 System.out.println("Veuillez saisir votre localisation :");
                 String Localisation = sc.nextLine();
-                hotel.update(HotelID,Nationnalite_ID,Nom,email,Localisation);
+                hotel.update(Nationnalite_ID,Nom,email,Localisation,HotelID);
             }else if(choix5==3){
                 System.out.println("Veuillez saisir l'Id de l'Hotel a supprimer :");
                 int HotelID = sc.nextInt();
@@ -427,7 +415,7 @@ public class Main {
                List<Hotel> hotelList = hotel.findAll();
                 System.out.println(hotelList.toString());
             }else if(choix5==5){
-                System.out.println("Veuillez saisir l'Id de l'Hotel a modifier :");
+                System.out.println("Veuillez saisir l'Id de l'Hotel a Rechercher :");
                 int HotelID = sc.nextInt();
                Hotel hotelocc = hotel.findOne(HotelID);
                 System.out.println(hotelocc.toString());

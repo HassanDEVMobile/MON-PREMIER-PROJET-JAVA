@@ -13,19 +13,15 @@ public class Joueur {
         this.Nationnalite_ID = Nationnalite_ID;
         this.Nom_Prenom = Nom_Prenom;
         this.age = age;
-        this.club = club;
         this.poste = poste;
         this.club = club;
     }
+     public Joueur(){
 
+     }
     public String toString(){
         return """
-                ID :%s
-                NATION ID : %s
-                NOM ET PRENOM : %s
-                age : %s
-                poste : %s
-                club : %s
+                ID :%s , NATION ID : %s , NOM ET PRENOM : %s , age : %s , poste : %s , club : %s
                 """.formatted(JoueurID,Nationnalite_ID, Nom_Prenom,age,poste, club);
     }
 

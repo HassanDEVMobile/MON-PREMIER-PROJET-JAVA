@@ -8,13 +8,15 @@ public class Equipe {
       this.id = id;
       this.Nom = Nom;
    }
+   public Equipe(String Nom){
+      this.Nom = Nom;
+   }
    public Equipe(){
 
    }
    public String toString(){
       return """
-              ID : %s
-              Nom : %s
+              ID : %s , Nom : %s
               """.formatted(id,Nom);
 
    }

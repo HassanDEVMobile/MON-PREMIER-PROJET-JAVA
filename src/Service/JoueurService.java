@@ -2,11 +2,12 @@ package Service;
 
 import dao.JoueurDAO;
 import models.Joueur;
+import models.Match;
 
 import java.util.List;
 
 public class JoueurService {
-
+      Joueur joueur = new Joueur();
     JoueurDAO joueurDAO;
     public JoueurService(){
         joueurDAO = new JoueurDAO();
@@ -19,6 +20,7 @@ public class JoueurService {
     public Joueur add(int Nationnalite_ID,String Nom_Prenom,int age,String poste,String club){
         return joueurDAO.add(Nationnalite_ID,Nom_Prenom, age,poste,club);
     }
+
 
 
     /**

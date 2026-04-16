@@ -1,8 +1,9 @@
 package Service;
 
 import dao.MatchDAO;
-import models.Equipe;
 import models.Match;
+
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -39,8 +40,8 @@ public class MatchService {
      * @param poule ce paramettre represente la poule de l'equipe
      * @return Ce paramettre permet de returner les Match
      */
-    public Match add( int EquipeDomicileID,int EquipeExterieurID , Date date, String stade, String poule){
-        return matchDOA.add( EquipeDomicileID,EquipeExterieurID ,date,stade,poule);
+    public Match add(int EquipeDomicileID, int EquipeExterieurID , String stade, String poule, String date){
+        return matchDOA.add( EquipeDomicileID,EquipeExterieurID ,stade,poule,date);
     }
 
     /**
@@ -52,7 +53,7 @@ public class MatchService {
         matchDOA .delete(id);
     }
 
-    public void update(int EquipeDomicileID,int EquipeExterieurID , Date date, String stade, String poule){
-        matchDOA .update( EquipeDomicileID,EquipeExterieurID ,date,stade,poule);
+    public void update(int EquipeDomicileID,int EquipeExterieurID,String poule , String stade,String date,int id){
+        matchDOA .update( EquipeDomicileID,EquipeExterieurID, poule,stade,date,id);
     }
 }

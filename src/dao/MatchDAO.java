@@ -3,16 +3,17 @@ import models.Equipe;
 import models.Match;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 public class MatchDAO {
-    private static final String Match_INSERT = "INSERT INTO Match (EquipeDomicileID,EquipeExterieurID,date,poule,stade) VALUES(?,?,?,?,?)";
-    private static final String Match_UPDATE = "UPDATE Match SET id = ?,poule = ?,EquipeDomicileID = ?,EquipeExterieurID = ?,stade = ?,date = ? WHERE id= ?";
-    private static final String Match_FINDALL = "SELECT*FROM Match";
-    private static final String Match_FINDONE = "SELECT*FROM Match WHERE id = ?";
-    private static final String Match_DELETE = "DELETE FROM Match WHERE id = ?";
+    private static final String Match_INSERT = "INSERT INTO match (EquipeDomicileID,EquipeExterieurID,poule,stade,date) VALUES(?,?,?,?,?)";
+    private static final String Match_UPDATE = "UPDATE match SET EquipeDomicileID = ?,EquipeExterieurID = ?,poule = ?,stade = ?,date = ? WHERE id= ?";
+    private static final String Match_FINDALL = "SELECT*FROM match";
+    private static final String Match_FINDONE = "SELECT*FROM match WHERE id = ?";
+    private static final String Match_DELETE = "DELETE FROM match WHERE id = ?";
 
     private static final String URL_DATABASE ="jdbc:mysql://localhost:3306/AppCan2024";
     private static final String USERNAME_DATABASE ="root";
@@ -42,8 +43,8 @@ public class MatchDAO {
                 int EquipeDomicileID = resultSet.getInt("EquipeDomicileID");
                 int EquipeExterieurID = resultSet.getInt("EquipeExterieurID");
                 String stade = resultSet.getNString("stade");
-                Date date = resultSet.getDate("date");
-                Match match = new Match( id ,poule , EquipeDomicileID,EquipeExterieurID ,stade ,date);
+                String date = resultSet.getNString("date");
+                Match match = new Match( id, EquipeDomicileID,EquipeExterieurID,poule ,stade ,date);
                 Match.add(match);
             }
         } catch (SQLException e) {
@@ -67,8 +68,8 @@ public class MatchDAO {
                 int EquipeDomicileID = resultSet.getInt("EquipeDomicileID");
                 int EquipeExterieurID = resultSet.getInt("EquipeExterieurID");
                 String stade = resultSet.getNString("stade");
-                Date date = resultSet.getDate("date");
-                Match match = new Match(id, poule, EquipeDomicileID, EquipeExterieurID, stade, date);
+                String date = resultSet.getNString("date");
+                Match match = new Match(id, EquipeDomicileID, EquipeExterieurID, poule, stade, date);
                 return match;
             }
         } catch (SQLException e) {
@@ -84,14 +85,14 @@ public class MatchDAO {
      * @param poule ce paramettre represente la poule de l'equipe
      * @return Ce paramettre permet de returner les Match
      */
-    public Match add(int EquipeDomicileID,int EquipeExterieurID , Date date, String stade, String poule){
+    public Match add(int EquipeDomicileID, int EquipeExterieurID ,String poule,String stade,String date){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(Match_INSERT);
             preparedStatement.setInt(1,EquipeDomicileID);
             preparedStatement.setInt(2,EquipeExterieurID);
-            preparedStatement.setDate(5,(java.sql.Date) date);
-            preparedStatement.setString(4,poule);
-            preparedStatement.setString(3,stade);
+            preparedStatement.setString(3,poule);
+            preparedStatement.setString(4,stade);
+            preparedStatement.setString(5,date);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -112,14 +113,15 @@ public class MatchDAO {
             throw new RuntimeException(e);
         }
     }
-    public void update(int EquipeDomicileID,int EquipeExterieurID , Date date, String stade, String poule){
+    public void update(int EquipeDomicileID,int EquipeExterieurID,String poule , String stade,String date,int id){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(Match_UPDATE);
-            preparedStatement.setString(2,poule);
-            preparedStatement.setInt(3,EquipeDomicileID);
-            preparedStatement.setInt(4,EquipeExterieurID);
-            preparedStatement.setString(5,stade);
-            preparedStatement.setDate(6, (java.sql.Date) date);
+            preparedStatement.setInt(1,EquipeDomicileID);
+            preparedStatement.setInt(2,EquipeExterieurID);
+            preparedStatement.setString(3,poule);
+            preparedStatement.setString(4,stade);
+            preparedStatement.setString(5,date);
+            preparedStatement.setInt(6,id);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

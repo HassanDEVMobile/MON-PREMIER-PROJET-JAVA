@@ -53,8 +53,8 @@ public class HotelService {
      * @param email
      * @param Localisation
      */
-    public void update(int HotelID,int Nationnalite_ID,String Nom,String email,String Localisation){
-         hotelDAO.update(HotelID,Nationnalite_ID, Nom,email,Localisation);
+    public void update(int Nationnalite_ID,String Nom,String email,String Localisation,int HotelID){
+         hotelDAO.update(Nationnalite_ID, Nom,email,Localisation,HotelID);
     }
 
 

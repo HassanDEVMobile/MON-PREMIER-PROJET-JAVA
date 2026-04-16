@@ -87,13 +87,13 @@ public class JoueurDAO {
                 String poste = resultSet.getNString("poste");
                 String club = resultSet.getNString("club");
               Joueur  joueur = new Joueur(JoueurID, Nationnalite_ID, Nom_Prenom, age, poste, club);
-               return joueur;
+              return joueur;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null;
 
+       return null;
     }
 
     /**

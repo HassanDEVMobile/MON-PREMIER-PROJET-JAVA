@@ -106,14 +106,14 @@ public class HotelDAO {
      * @param email
      * @param Localisation
      */
-    public void update(int HotelID,int Nationnalite_ID,String Nom,String email,String Localisation){
+    public void update(int Nationnalite_ID,String Nom,String email,String Localisation,int HotelID){
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(Hotel_UPDATE);
-            preparedStatement.setInt(1,HotelID);
-            preparedStatement.setInt(2,Nationnalite_ID);
-            preparedStatement.setString(3,Nom);
-            preparedStatement.setString(4,email);
-            preparedStatement.setString(5,Localisation);
+            preparedStatement.setInt(1,Nationnalite_ID);
+            preparedStatement.setString(2,Nom);
+            preparedStatement.setString(3,email);
+            preparedStatement.setString(4,Localisation);
+            preparedStatement.setInt(5,HotelID);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);

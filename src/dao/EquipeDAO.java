@@ -12,7 +12,7 @@ public class EquipeDAO {
     private static String Equipe_INSERT = "INSERT INTO Equipe (Nom) VALUES (?)";
     private static String Equipe_UPDATE = "UPDATE Equipe SET Nom = ? WHERE id = ?";
     private static String Equipe_FINDALL = "SELECT * FROM Equipe ";
-    private static String Equipe_FINDONE = "SELECT * FROM Equipe WHERE id = ";
+    private static String Equipe_FINDONE = "SELECT * FROM Equipe WHERE id = ? ";
     private static String Equipe_DELETE = "DELETE FROM Equipe WHERE id = ?";
 
     private static final String URL_DATABASE ="jdbc:mysql://193.203.169.18:3306/App_can2024";
@@ -85,7 +85,7 @@ public class EquipeDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null;
+      return null;
     }
 
     public void update(int id,String Nom){
@@ -103,6 +103,7 @@ public class EquipeDAO {
     public Equipe findOne(int id) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(Equipe_FINDONE);
+            preparedStatement.setInt(1,id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 id = resultSet.getInt("id");
